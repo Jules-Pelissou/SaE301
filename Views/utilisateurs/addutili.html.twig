@@ -1,0 +1,38 @@
+{# {% extends 'index.html.twig' %} #}
+    {% block form %}
+    <form method="post" action="index.php" class="well">
+	<fieldsetclass="form-group">
+	 <legend>Inscription</legend>
+	 <div class="form-group row mt-2">
+	   <label for="pseudo" class="col-sm-2 col-form-label col-form-label-sm">Pseudo</label>
+	   <div class="col-sm-10">
+		 <input  type="text" id="pseudo" class="form-control form-control-sm" name="pseudo" required placeholder="Votre pseudo qui apparaîtra sur l'application" />
+	   </div>
+	 </div>
+	 <div class="form-group row mt-2">
+	   <label for="nom" class="col-sm-2 col-form-label col-form-label-sm">Nom</label>
+	   <div class="col-sm-10">
+		 <input type="text" id="nom"  name="nom" required placeholder="Votre nom"/>
+	   </div>
+	 </div>
+	 <div class="form-group row mt-2">
+	   <label for="prenom" class="col-sm-2 col-form-label col-form-label-sm">Prenom</label>
+	   <div class="col-sm-10">
+		 <input type="text" name="prenom" id="prenom" class="prenom" placeholder="Votre prénom">
+	   </div>
+	 </div>
+	 <div class="form-group row mt-2">
+	   <label for="mail" class="col-sm-2 col-form-label col-form-label-sm">Mail</label>
+	   <div class="col-sm-10">
+		<input type="text" name="mail" id="mail" cols="80" rows="10" placeholder="Votre email"></input>
+	   </div>
+	 </div>
+     	 <div class="form-group row mt-2">
+	   <label for="mdp" class="col-sm-2 col-form-label col-form-label-sm">Mot de passe</label>
+	   <div class="col-sm-10">
+		<input type="password" name="mdp" id="mdp" cols="80" rows="10" placeholder="Votre mot de passe"></input>
+	   </div>
+	 </div>
+	 
+	 <input type="submit" class="btn btn-primary mt-2" name="valider_ajout_utilisateur" value="valider"/>
+    {% endblock %}

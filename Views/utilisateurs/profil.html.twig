@@ -1,0 +1,83 @@
+{# {% extends 'index.html.twig' %} #}
+    {% block content %}
+  {% for utilisateur in pseudos %}
+  <h1>Profil de {{utilisateur.pseudo}}</h1>
+    <br>
+    <p>Crée le {{utilisateur.date_inscription}}</p>
+    <h3>Tous les jeux crées par {{utilisateur.pseudo}} :</h3>
+    <div class="my-2 mx-2 d-flex flex-row ">
+    {% for jeu in jeux %}
+  <div class="d-flex flex-column border border-primary my-2 mx-2">
+    <img  class="card-img-top" style="width :18rem;" src={{"./img/"~ jeu.photo}} alt="Image de {{jeu.nom_jeu}} ">
+    <div class="card-body">
+      <h5 class="card-title">{{jeu.nom_jeu}}</h5>
+      <div>
+        <p class="card-text">Jeu de {{jeu.nom_categorie}} <br> Durée de {{jeu.duree_jeu}} min, pour jusqu'a {{jeu.nombre_joueurs}} joueurs
+        <p class="card-text">Crée par <a class="btn border border-primary" href="?action=profil&pseudo={{jeu.pseudo}}">{{jeu.pseudo}}</a></p><br>
+      <a class="btn btn-primary" href="?action=detail&nom_jeu={{jeu.nom_jeu}}">En savoir plus</a>     
+      </div>
+      <br>
+    </div>
+  </div>
+   {% endfor %}
+</div>
+<br>
+<h3>Tous les commentaires postés par {{utilisateur.pseudo}} :</h3>
+<div class="d-flex flex-row">
+{% for commenter in commentaires %}
+    <div class="border border-primary m-3" >
+    <h5>{{commenter.pseudo}} le {{commenter.date_ajout}} sur {{commenter.nom_jeu}}</h5>
+    <p>{{commenter.commentaire}}</p>
+    </div>
+    {% endfor %}
+</div>
+<br>
+<h3>Toutes les notes mises par {{utilisateur.pseudo}} :</h3>
+<div class="d-flex flex-row">
+    
+    {% for noter in notes %}
+    <div class="border border-danger m-3" >
+    <h5>{{noter.pseudo}} le {{noter.date_ajout}} sur {{noter.nom_jeu}}</h5>
+    <p class="text-center" >{{noter.note}} / 5</p>
+    </div>
+
+    {% endfor %}
+
+
+  {% endfor %}
+    {# {% for utilisateur in pseudos %}
+    <h1>Profil de {{utilisateur.pseudo}}</h1>
+    <br>
+    <h3>Tous les jeux crées par {{utilisateur.pseudo}} :</h3>
+        {% for jeu in jeux %}
+        <div class="card" style="width: 18rem;">
+            <img  class="card-img-top"  src={{"./img/"~ jeu.photo}} alt="Image de {{jeu.nom_jeu}} ">
+            <div class="card-body">
+            <h5 class="card-title">{{jeu.nom_jeu}}</h5>
+            <p class="card-text">Jeu de {{jeu.nom_categorie}} <br> Durée de {{jeu.duree_jeu}} min, pour jusqu'a {{jeu.nombre_joueurs}} joueurs
+            <p class="card-text">Crée {{jeu.pseudo}}</p>
+            <a class="btn btn-primary" href="?action=detail&nom_jeu={{jeu.nom_jeu}}">En savoir plus</a>
+        </div>
+        {% endfor %}
+    <br>
+    <h3>Tous les commentaires postés par {{utilisateur.pseudo}}</h3>
+
+    {% for commenter in commentaires %}
+    <div class="border border-primary" >
+    <h5>{{commenter.pseudo}} le {{commenter.date_ajout}} sur {{commenter.nom_jeu}}</h5>
+    <p>{{commenter.commentaire}}</p>
+    </div>
+    {% endfor %}
+
+    <h3>Toutes les notes mises par {{utilisateur.pseudo}}</h3>
+
+    {% for noter in notes %}
+
+    <div class="border border-danger" >
+    <h5>{{noter.pseudo}} le {{noter.date_ajout}} sur {{noter.nom_jeu}}</h5>
+    <p>{{noter.note}} / 5</p>
+    </div>
+
+    {% endfor %}
+  {% endfor %} #}
+{% endblock %}

@@ -1,0 +1,18 @@
+{# {% extends 'index.html.twig' %} #}
+    {% block content %}
+
+<form method='POST' action='index.php' class='well'> 
+<fieldset>
+<legend>Choix du jeu à modifier </legend>
+
+<select name='nom_jeu'>
+    {% for jeux in jeux %}
+    <option value= "{{jeux.nom_jeu}}" > {{jeux.nom_jeu}} </option>
+    {% endfor %}
+
+    </select>
+    <input type='submit' name='saisie_modif' value='modifier'>
+    </fieldset>
+    </form>
+
+{% endblock %}

@@ -1,0 +1,76 @@
+{# {% extends 'index.html.twig' %} #}
+    {% block content %}
+<h1> Administration </h1>
+<br>
+<h2> Gestion des jeux </h2>
+<br>
+<div class="my-2 mx-2 d-flex flex-row ">
+  {% for jeu in jeux %}
+  <div class="w-25 d-flex flex-column border border-primary m-3">
+    <img src={{"./img/"~ jeu.photo}} class="card-img-top" style="width: 100%;" alt="Image du jeu " {{jeu.nom_jeu}}>
+    <div class="card-body">
+      <h5 class="card-title">{{jeu.nom_jeu}}</h5>
+      <div>
+        <p class="card-text">Jeu de {{jeu.nom_categorie}} <br> Durée de {{jeu.duree_jeu}} min, pour jusqu'a {{jeu.nombre_joueurs}} joueurs
+        <p class="card-text">Crée par <a class="btn border border-primary" href="?action=profil&pseudo={{jeu.pseudo}}">{{jeu.pseudo}}</a></p><br>
+      <a class="btn btn-primary" href="?action=detail&nom_jeu={{jeu.nom_jeu}}">En savoir plus</a>
+      <br>
+      <a class="btn btn-primary" href="?action=valider&nom_jeu={{jeu.nom_jeu}}">Valider le jeu</a>
+      <br>
+      <a class="btn btn-primary" href="?action=supprimer&nom_jeu={{jeu.nom_jeu}}">Supprimer le jeu</a>
+      </div>
+      <br>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<h2> Gestion des commentaires </h2>
+  <div class="my-2 mx-2 d-flex flex-row">
+  {% for commentaires in commentaires %}
+    <div style="border: solid 2px red; margin : 2px">
+    <h5>{{commentaires.pseudo}}, {{commentaires.nom_jeu}}</h5>
+    <p style="text-align : center">{{commentaires.commentaire}}, {{commentaires.id}}</p>
+    <div class="d-flex flex-row">
+    <a class="btn btn-primary" style="height : 40px; weight : 25px; margin : 10px" href="?action=valider_commentaire&id={{commentaires.id}}">Valider</a>
+    <a class="btn btn-primary" style="height : 40px; weight : 25px; margin : 10px" href="?action=supprimer_commentaire&id={{commentaires.id}}">Supprimer</a>
+    </div>
+    </div>
+  {% endfor %}
+  </div>
+<h2> Gestion des Utilisateurs </h2>
+  <br>
+  <div class="my-2 mx-2 d-flex flex-row">
+  <form method="Post" action="index.php">
+  <select name="pseudo">
+  {% for pseudo in pseudos %}
+  <option value={{pseudo.pseudo}} name="pseudo">{{pseudo.pseudo}}</option>
+  {% endfor %}
+  </select>
+  <input type="button" id="etesvoussur" value="Supprimer l'Utilisateur">
+  <div id="bouton">
+  </div>
+  {# <input type="submit" name="supprimer_utilisateur" value="Supprimer l'Utilisateur"> #}
+  </form>
+  </div>
+  <br>
+
+  <h2> Gestion des Catégories </h2>
+  <br>
+  <div class="my-2 mx-2 d-flex flex-column">
+  <form method="Post" action="index.php">
+  <input type="text" id="nom_categorie" name="nom_categorie" placeholder="Ajouter une catégorie">
+  <input type="submit" name="ajout_categorie" value="Ajouter la catégorie">
+  </form>
+  <br>
+  <form method="Post" action="index.php">
+  <select name="categorie">
+  <option>-----</option>
+  {% for categorie in categories %}
+  <option value="{{categorie.nom_categorie}}" name="{{categorie.nom_categorie}}">{{categorie.nom_categorie}}</option>
+  {% endfor %}
+  </select>
+  <input type="submit" name="supprimer_categorie" value="Supprimer la catégorie">
+  </form>
+  </div>
+  <script src="./scripts/script.js"></script>
+{% endblock %}

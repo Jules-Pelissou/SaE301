@@ -1,0 +1,147 @@
+{# {% extends 'index.html.twig' %} #}
+    {% block content %}
+    {% set diviseur = 0 %}
+    {% set moyenne = 0 %}
+    {% for jeu in jeux %}
+    <h1>{{jeu.nom_jeu}}</h1>
+    <p>Un jeu de {{jeu.nom_categorie}} par <a class="btn border border-primary" href="?action=profil&pseudo={{jeu.pseudo}}">{{jeu.pseudo}}</a> , ajouté le {{jeu.date_ajout}}</p>
+    <img src={{"./img/"~ jeu.photo}} alt="Image de {{jeu.nom_jeu}} ">
+
+    <h2> Règles du jeu </h2>
+    <p>{{jeu.regles}}</p>
+
+    <h3>Durée</h3>
+    <p>{{jeu.duree_jeu}} minutes</p>
+
+    <h3>Nombre de joueurs</h3>
+    <p>{{jeu.nombre_joueurs}} joueurs</p>
+
+    <h3>Matériel necessaire</h3>
+    <p>{{jeu.materiel}}</p>
+    
+    <h2>Note moyenne</h2>
+    <br>
+    {# Calcul de la moyenne #}
+
+    {% for noter in notes %}
+    {% set moyenne = moyenne + noter.note %}
+    {% set diviseur = diviseur + 1 %}
+    {% endfor %}
+
+    {# If permettant d'éviter la division par 0 #}
+
+    {% if moyenne == 0 or diviseur == 0 %}
+    <h5>Il n'y a pas de notes pour l'instant</h5>
+    {% else %}
+    <h5>{{moyenne // diviseur}} / 5</h5>
+    {% endif %}
+    <br>
+
+    {% if (connecte == "oui") %}
+
+    <form method="POST" action="index.php" class="well">
+    
+    <legend>Ajouter une note</legend>
+
+    <div class="form-group row mt-4">
+	   <label for="note" class="col-sm-2 col-form-label col-form-label-sm mt-2">Attribuer une note sur 5</label>
+	   <div class="col-sm-10">
+		<select class= "mt-2" name="note">
+            <option name="note" value="1">1</option>
+            <option name="note" value="2">2</option>
+            <option name="note" value="3">3</option>
+            <option name="note" value="4">4</option>
+            <option name="note" value="5">5</option>
+        </select>
+	   </div>
+	 </div>
+    
+
+    <div class="form-group row mt-2">
+	    <div class="col-sm-10">
+	        {% for jeu in jeux %}
+		    <input type="hidden" name="nom_jeu" value="{{jeu.nom_jeu}}">
+		    {% endfor %}
+	    </div>
+	</div>
+
+    <div class="form-group row mt-2">
+	   <div class="col-sm-10">
+	    {% for pseudo in pseudos %}
+		<input type="hidden" name="pseudo" value="{{pseudo.pseudo}}">
+	    {% endfor %}
+	   </div>
+	</div>
+
+
+    <div class="form-group row mt-2">
+	   <div class="col-sm-10">
+	    {% for pseudo in pseudos %}
+		<input type="hidden" name="pseudo_jeu" value="{{jeu.pseudo}}">
+	    {% endfor %}
+	   </div>
+	</div>
+
+        <input type="submit" class="btn btn-primary mt-2" name="ajout_note" value="Ajouter une note"/>
+    
+    </form>
+
+
+    <br>
+    {% endif %}
+
+    <h2 class="mt-3">Commentaires</h2>
+
+    {% for commenter in commentaires %}
+    <br>
+    <h5>{{commenter.pseudo}}, {{commenter.date_ajout}}</h5>
+    <p>{{commenter.commentaire}}</p>
+        {% if (admin == "oui") %}
+        <a class="btn btn-danger" style="height : 40px; weight : 25px; margin : 10px" href="?action=supprimer_commentaire&id={{commenter.id}}">Supprimer</a>
+        {% endif %}
+    {% endfor %}
+
+    {% if (connecte == "oui")%}
+    <form method="POST" action="index.php" class="well">
+
+        <div class="form-group row mt-2">
+	   <label for="commentaire" class="col-sm-2 col-form-label col-form-label-sm">Votre commentaire</label>
+	   <div class="col-sm-10">
+		<textarea name="commentaire" id="commentaire" cols="40" rows="5" placeholder="Commentaire ..."></textarea>
+	   </div>
+	    </div>
+
+        <div class="form-group row mt-2">
+	   <div class="col-sm-10">
+	   {% for jeu in jeux %}
+		<input type="hidden" name="nom_jeu" value="{{jeu.nom_jeu}}">
+		{% endfor %}
+	   </div>
+	    </div>
+
+        <div class="form-group row mt-2">
+	   <div class="col-sm-10">
+	   {% for pseudo in pseudos %}
+		<input type="hidden" name="pseudo" value="{{pseudo.pseudo}}">
+	    {% endfor %}
+	   </div>
+	     </div>
+
+        <div class="form-group row mt-2">
+	   <div class="col-sm-10">
+	   {% for pseudo in pseudos %}
+		<input type="hidden" name="pseudo_jeu" value="{{jeu.pseudo}}">
+	    {% endfor %}
+	   </div>
+	    </div>
+
+
+        <input type="submit" class="btn btn-primary mt-2" name="ajout_commentaire" value="Ajouter un commentaire"/>
+    
+    </form>
+    {% endif %}
+
+    <br>
+
+    {% endfor %}
+{% endblock %}

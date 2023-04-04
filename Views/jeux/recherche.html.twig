@@ -1,0 +1,21 @@
+{# {% extends 'index.html.twig' %} #}
+    {% block content %}
+
+<div class="my-2 mx-2 d-flex flex-row ">
+  {% for jeu in jeux %}
+  <div class="w-25 d-flex flex-column border border-primary m-3">
+    <img src={{"./img/"~ jeu.photo}} class="card-img-top" style="width: 100%;" alt="Image du jeu " {{jeu.nom_jeu}}>
+    <div class="card-body">
+      <h5 class="card-title">{{jeu.nom_jeu}}</h5>
+      <div>
+        <p class="card-text">Jeu de {{jeu.nom_categorie}} <br> Durée de {{jeu.duree_jeu}} min, pour jusqu'a {{jeu.nombre_joueurs}} joueurs
+        <p class="card-text">Crée par <a class="btn border border-primary" href="?action=profil&pseudo={{jeu.pseudo}}">{{jeu.pseudo}}</a></p><br>
+      <a class="btn btn-primary" href="?action=detail&nom_jeu={{jeu.nom_jeu}}">En savoir plus</a>     
+      </div>
+      <br>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}

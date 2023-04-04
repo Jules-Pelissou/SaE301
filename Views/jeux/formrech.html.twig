@@ -1,0 +1,75 @@
+{# {% extends 'index.html.twig' %} #}
+    {% block content %}
+
+    <form id="recherche" method="post" action="index.php" class="well">
+        <fieldset class="form-group"> <legend>Recherche de jeux</legend>
+        
+        <div class="form-group row">
+            <label for="nom_jeu" class="col-sm-2 col-form-label col-form-label-sm">Nom du jeu</label>
+            <div class="col-sm-10">
+                <input type="text" id="nom_jeu" name="nom_jeu" class="form-control form-control-sm" placeholder="Nom du jeu"/>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="nom_categorie" class="col-sm-2 col-form-label col-form-label-sm">Catégorie du jeu</label>
+                <div class="col-sm-10">
+                    <select name = "nom_categorie">
+                    <option value="" name="">----</option>
+			           {% for categorie in categories %}
+				            <option value= {{categorie.nom_categorie}} name= {{categorie.nom_categorie}}>{{categorie.nom_categorie}}</option>
+			            {% endfor %}
+		            </select>
+                </div>
+        </div>
+
+
+        <div class="form-group row">
+            <label for="nombre_joueurs" class="col-sm-2 col-form-label col-form-label-sm">Nombre de joueurs</label>
+            <div class="col-sm-10">
+                {# <input type="number" name="nombre_joueurs">
+                <input type="number" name="nombre_joueurmax"> #}
+                <select name = "nombre_joueurs">
+                    <option value="" name="nombre_joueurs">----</option>
+                    <option value="2" name="nombre_joueurs">2 et moins</option>
+                    <option value="4" name="nombre_joueurs">4 et moins</option>
+                    <option value="10" name="nombre_joueurs">10 et moins</option>
+                    <option value="9999" name="nombre_joueurs">10+</option>
+		        </select>
+            </div>
+        </div>
+
+    <div class="form-group row mt-2">
+	    <label for="pseudo" class="col-sm-2 col-form-label col-form-label-sm">Pseudo du créateur</label>
+	   <div class="col-sm-10">
+		 <select name = "pseudo">
+            <option value="" name="">----</option>
+			{% for pseudo in pseudos %} 
+				<option value={{pseudo.pseudo}} name= {{pseudo.pseudo}}>{{pseudo.pseudo}}</option>
+			{% endfor %}
+		 </select>
+	   </div>
+
+	 </div>
+
+    <div class="form-group row mt-2">
+	    <label for="duree_jeu" class="col-sm-2 col-form-label col-form-label-sm">Durée de jeu (en min)</label>
+	   <div class="col-sm-10">
+		 <select name = "duree_jeu">
+            <option value="" name="">----</option>
+			<option value="15" name="">15</option>
+            <option value="30" name="">30</option>
+            <option value="45" name="">45</option>
+            <option value="60" name="">60</option>
+            <option value="9999" name="">60 +</option>
+		 </select>
+	   </div>
+
+	 </div>
+
+            <input type="submit" name="valider_recher" value="valider"/>
+        </fieldset>
+    </form>
+
+
+    {% endblock %}

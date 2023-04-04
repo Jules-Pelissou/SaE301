@@ -1,0 +1,60 @@
+{# {% extends 'index.html.twig' %} #}
+    {% block content %}
+
+<form method="post" action="index.php" class="well">
+	<fieldsetclass="form-group">
+	 <legend>Modifier {{jeux.nom_jeu}}</legend>
+	 <div class="form-group row">
+	 <input type="hidden" id="nom_jeu" name="nom_jeu" value="{{jeux.nom_jeu}}" />
+	   <label for="nom_jeu" class="col-sm-2 col-form-label col-form-label-sm">Nom du jeu</label>
+	   <div class="col-sm-10">
+		 <input  type="text" id="nom_jeu" class="form-control form-control-sm" name="nom_jeu" required placeholder="Nom du jeu" value="{{jeux.nom_jeu}}" readonly/>
+	   </div>
+	 </div>
+	 <div class="form-group row">
+	   <label for="photo" class="col-sm-2 col-form-label col-form-label-sm">Photo</label>
+	   <div class="col-sm-10">
+		 <input type="text" id="photo" class="form-control form-control-sm" name="photo" placeholder="Photo" value="{{jeux.photo}}"/>
+	   </div>
+	 </div>
+	 <div class="form-group row">
+	   <label for="nombre_joueurs" class="col-sm-2 col-form-label col-form-label-sm">Nombre de joueurs</label>
+	   <div class="col-sm-10">
+		 <input type="number" min="0" id="nombre_joueurs" class="form-control form-control-sm" name="nombre_joueurs" required placeholder="Nombre de joueurs" value="{{jeux.nombre_joueurs}}"/>
+	   </div>
+	 </div>
+	 <div class="form-group row">
+	   <label for="regles" class="col-sm-2 col-form-label col-form-label-sm">Nouvelles règles du jeu</label>
+	   <div class="col-sm-10">
+		 <input type="text" id="regles" class="form-control form-control-sm" name="regles" required placeholder="Règles" value="{{jeux.regles}}"/>
+	   </div>
+	 </div>
+	 <div class="form-group row">
+	   <label for="nom_categorie" class="col-sm-2 col-form-label col-form-label-sm">Catégorie du jeu</label>
+	   <div class="col-sm-10">
+	    <select name="nom_categorie" id="nom_categorie">
+			<option value="{{jeux.nom_categorie}}"> {{jeux.nom_categorie}} </option>
+			{% for categories in categories %}
+				<option value="{{categories.nom_categorie}}"> {{categories.nom_categorie}} </option>
+			{% endfor %}
+		 {# <input  type="text" id="nom_categorie" class="form-control form-control-sm" name="nom_categorie" required placeholder="Catégorie du jeu" value="{{jeux.nom_categorie}}"/> #}
+	   </div>
+	 </div>
+	 <div class="form-group row">
+	   <label for="materiel" class="col-sm-2 col-form-label col-form-label-sm">Matériel</label>
+	   <div class="col-sm-10">
+		 <input type="text" id="materiel" class="form-control form-control-sm" name="materiel" required placeholder="Matériel" value="{{jeux.materiel}}"/>
+	   </div>
+	 </div>
+	 <div class="form-group row">
+	   <label for="tarif" class="col-sm-2 col-form-label col-form-label-sm">Durée de jeu</label>
+	   <div class="col-sm-10">
+		 <input type="number" min="0" id="duree_jeu" class="form-control form-control-sm" name="duree_jeu" required placeholder="Durée de jeu" value="{{jeux.duree_jeu}}"/>
+	   </div>
+	 </div>
+	 <input type="hidden" id="date_ajout" name="date_ajout" value="2023-05-20" />
+	<input type="submit" class="btn btn-primary" name="valider_modif" value="modifier"/>
+	</fieldset>
+	</form>
+
+    {% endblock %}

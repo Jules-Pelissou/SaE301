@@ -1,0 +1,71 @@
+{# {% extends 'index.html.twig' %} #}
+    {% block form %}
+    <form method="post" action="index.php" class="well" enctype='multipart/form-data'>
+	<fieldsetclass="form-group">
+	 
+	 <legend>Ajouter un Jeu</legend>
+	 
+	 <div class="form-group row mt-2">
+	   <label for="nom_jeu" class="col-sm-2 col-form-label col-form-label-sm">Nom</label>
+	   <div class="col-sm-10">
+		 <input  type="text" id="nom_jeu" class="form-control form-control-sm" name="nom_jeu" required placeholder="Nom du jeu ( ATTENTION, NON MODIFIABLE !! )" />
+	   </div>
+	 </div>
+	 
+	 <div class="form-group row mt-2">
+	   <label for="nombre_joueurs" class="col-sm-2 col-form-label col-form-label-sm">Nombre de Joueurs</label>
+	   <div class="col-sm-10">
+		 <input type="number" min= 1 max= 999 id="nombre_joueurs" class="form-control form-control-sm" name="nombre_joueurs" required placeholder="Nombre de joueurs"/>
+	   </div>
+	 </div>
+	 
+	 <div class="form-group row mt-2">
+	   <label for="duree_jeu" class="col-sm-2 col-form-label col-form-label-sm">Durée de jeu</label>
+	   <div class="col-sm-10">
+		 <input type="number" min=1 max = 999 name="duree_jeu" id="duree_jeu" class="duree_jeu" placeholder="en min">
+	   </div>
+	 </div>
+	 
+	 <div class="form-group row mt-2">
+	   <label for="relges" class="col-sm-2 col-form-label col-form-label-sm">Règles</label>
+	   <div class="col-sm-10">
+		<textarea name="regles" id="regles" cols="80" rows="10" placeholder="Les règles de votre jeu"></textarea>
+	   </div>
+	 </div>
+	
+	<div class="form-group row mt-2">
+	   <label for="materiel" class="col-sm-2 col-form-label col-form-label-sm">Matériel</label>
+	   <div class="col-sm-10">
+		<textarea name="materiel" id="materiel" cols="40" rows="5" placeholder="Le matériel nécessaire pour votre jeu"></textarea>
+	   </div>
+	 </div>
+	 
+	 <div class="form-group row mt-2">
+	   <div class="col-sm-10">
+	   {% for pseudo in pseudos %}
+		<input type="hidden" name="pseudo" value={{pseudo.pseudo}}>
+		{% endfor %}
+	   </div>
+	 </div>
+
+	 <div class="form-group row mt-2">
+	   <label for="tarif" class="col-sm-2 col-form-label col-form-label-sm">Catégorie de jeu</label>
+	   <div class="col-sm-10">
+		 <select name="nom_categorie">
+			{% for categorie in categories %}
+				<option value= {{categorie.nom_categorie}} name= {{categorie.nom_categorie}}>{{categorie.nom_categorie}}</option>
+			{% endfor %}
+		 </select>
+	   </div>
+	 </div>
+
+	<div class="form-group row mt-2">
+	   <label for="photo" class="col-sm-2 col-form-label col-form-label-sm">Photo de votre jeu (facultatif)</label>
+	   <div class="col-sm-10">
+		 <input type="file" name="photo">
+	   </div>
+	 </div>
+	 
+	 <input type="submit" class="btn btn-primary mt-2" name="valider_ajout" value="valider"/>
+
+    {% endblock %}
